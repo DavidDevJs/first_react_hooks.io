@@ -4,7 +4,7 @@ import Characters from './components/Characters';
 
 function App() {
   return (
-    <div className="App">
+    <div className="App dark:bg-blueDark px-5 bg-gray-200">
       <Header />
       <Characters />
     </div>
