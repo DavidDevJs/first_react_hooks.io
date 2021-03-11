@@ -10,12 +10,12 @@ const Header = () => {
 
   return (
     <div className="p-6">
-      <h1 className="text-6xl font-bebas text-orange dark:text-green-600 text-center ">
+      <h1 className="text-6xl text-center font-bebas text-orange dark:text-green-600 ">
         React_Hooks
       </h1>
 
       <button
-        className="text-blueDark dark:text-white w-10 h-10 bg-orange rounded-full dark:bg-green-500"
+        className="w-10 h-10 border-transparent rounded-full focus:outline-none text-blueDark dark:text-white bg-orange dark:bg-green-500"
         onClick={() => changeTheme()}
         type="button"
       >

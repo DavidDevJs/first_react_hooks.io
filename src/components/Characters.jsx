@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 function Characters() {
   const [characters, setCharacters] = useState([]);
-  let page = 1;
+  let page = 19;
 
   useEffect(() => {
     fetch(`https://rickandmortyapi.com/api/character?page=${page}`)
@@ -22,7 +22,7 @@ function Characters() {
                   src={character.image}
                   alt={character.name}
                 />
-                <div className=" p-5 dark:text-green-500 text-orange rounded-b-sm font-play bg-blueOpacity dark:bg-gray-700">
+                <div className="p-5 rounded-b-sm dark:text-green-500 text-orange font-play bg-blueOpacity dark:bg-gray-700">
                   <p>{character.name}</p>
                   <p>{character.species}</p>
                   <p>{character.origin.name}</p>
@@ -36,7 +36,7 @@ function Characters() {
       </ul>
 
       <button
-        className="w-full p-3 my-4 mx-auto h-15 bg-green-600 text-grayLigth font-play"
+        className="w-full p-3 mx-auto my-4 bg-green-600 h-15 text-grayLigth font-play"
         onClick={page}
       >
         Load More
