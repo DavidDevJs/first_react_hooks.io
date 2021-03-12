@@ -2,17 +2,17 @@
   "name": "react-hooks",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://Davidgonz-maker.github.io/first_react_hooks.io",
+  "homepage": "https://davidgonz-maker.github.io/first_react_hooks.io/",
   "dependencies": {
     "@craco/craco": "^6.1.1",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.8.1",
     "gh-pages": "^3.1.0",
-    "next-themes": "^0.0.12",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-scripts": "4.0.3",
+    "react-hook-tailwind-darkmode": "^0.0.7",
     "web-vitals": "^1.1.0"
   },
   "scripts": {
@@ -45,7 +45,6 @@
     "@tailwindcss/postcss7-compat": "^2.0.3",
     "autoprefixer": "^9.8.6",
     "postcss": "^7.0.35",
-    "react-hook-tailwind-darkmode": "^0.0.7",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.3"
   }
 }
