@@ -2,13 +2,15 @@ import React, { useState, useEffect } from 'react';
 
 function Characters() {
   const [characters, setCharacters] = useState([]);
-  let page = 19;
+  const [page, setPage] = useState(1);
+
+  const url = `https://rickandmortyapi.com/api/character/?page=${page}`;
 
   useEffect(() => {
-    fetch(`https://rickandmortyapi.com/api/character?page=${page}`)
+    fetch(url)
       .then((response) => response.json())
       .then((data) => setCharacters(data.results));
-  }, []);
+  });
 
   return (
     <div>
@@ -16,6 +18,7 @@ function Characters() {
         {characters.map((character) => {
           return (
             <li key={character.id}>
+              {' '}
               <div className="mx-auto w-max">
                 <img
                   className="rounded-t-sm"
@@ -36,10 +39,17 @@ function Characters() {
       </ul>
 
       <button
+        onClick={() => setPage(page + 1)}
         className="w-full p-3 mx-auto my-4 bg-green-600 h-15 text-grayLigth font-play"
-        onClick={page}
       >
-        Load More
+        Next Page
+      </button>
+
+      <button
+        onClick={() => setPage(page - 1)}
+        className="w-full p-3 mx-auto my-4 bg-yellow-600 h-15 text-grayLigth font-play"
+      >
+        Previous Page
       </button>
     </div>
   );
