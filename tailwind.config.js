@@ -8,12 +8,18 @@ module.exports = {
     },
     extend: {
       colors: {
-        blueDark: '#0D1013',
-        blueDarkMedium: '#000B18',
-        blueDarkLigth: '#002B56',
-        orange: '#FF8A00',
-        grayLigth: '#E9EBF3',
-        blueOpacity: '#222931',
+        dark: {
+          100: '#F5F7FA',
+          200: '#3E4C59',
+          300: '#1F2933',
+          400: '#609E2F',
+        },
+        light: {
+          100: '#B0BEC5',
+          200: '#020421',
+          300: '#F5F7FA',
+          400: '#FF8A00',
+        },
       },
     },
   },
