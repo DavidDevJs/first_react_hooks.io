@@ -9,6 +9,10 @@
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.8.1",
     "gh-pages": "^3.1.0",
+<<<<<<< HEAD
+=======
+    "next-themes": "^0.0.12",
+>>>>>>> 67e2e82
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-hook-tailwind-darkmode": "^0.0.7",

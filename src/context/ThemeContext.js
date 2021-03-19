@@ -1,5 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
+export const ThemeContext = React.createContext();
 
-const ThemeContext = React.createContext(null);
+export default ({ children }) => {
+  const [theme, setTheme] = React.useState('light');
 
-export default ThemeContext;
+  const defaultContext = {
+    theme,
+    setTheme,
+  };
+
+  return (
+    <ThemeContext.Provider value={defaultContext}>
+      {children}
+    </ThemeContext.Provider>
+  );
+};

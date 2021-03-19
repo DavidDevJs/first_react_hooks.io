@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { ThemeContext } from '../context/ThemeContext';
 
 function Characters() {
   const [characters, setCharacters] = useState([]);
   const [page, setPage] = useState(1);
+  const { theme } = useContext(ThemeContext);
 
   const url = `https://rickandmortyapi.com/api/character/?page=${page}`;
 
@@ -13,7 +15,7 @@ function Characters() {
   });
 
   return (
-    <div>
+    <div className={`bg-${theme}-300`}>
       <ul className="Characters grid grid-cols-1 sm:grid-cols-4 gap-4">
         {characters.map((character) => {
           return (
@@ -25,7 +27,9 @@ function Characters() {
                   src={character.image}
                   alt={character.name}
                 />
-                <div className="p-5 rounded-b-sm dark:text-green-500 text-orange font-play bg-blueOpacity dark:bg-gray-700">
+                <div
+                  className={`bg-${theme}-200 p-5 rounded-b-sm font-play text-${theme}-400`}
+                >
                   <p>{character.name}</p>
                   <p>{character.species}</p>
                   <p>{character.origin.name}</p>
