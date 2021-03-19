@@ -1,9 +1,26 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useReducer } from 'react';
 import { ThemeContext } from '../context/ThemeContext';
+
+const initialState = {
+  favorites: [],
+};
+
+const favoriteReducer = (state, action) => {
+  switch (action.type) {
+    case 'ADD_TO_FAVORITE':
+      return {
+        ...state,
+        favorites: [...state.favorites, action.payload],
+      };
+    default:
+      return state;
+  }
+};
 
 function Characters() {
   const [characters, setCharacters] = useState([]);
   const [page, setPage] = useState(1);
+  const [favorite, dispatch] = useReducer(favoriteReducer, initialState);
   const { theme } = useContext(ThemeContext);
 
   const url = `https://rickandmortyapi.com/api/character/?page=${page}`;
@@ -13,6 +30,10 @@ function Characters() {
       .then((response) => response.json())
       .then((data) => setCharacters(data.results));
   });
+
+  const handleClick = () => {
+    dispatch({ type: 'ADD_TO_FAVORITE', payload: favorite });
+  };
 
   return (
     <div className={`bg-${theme}-300`}>
@@ -30,6 +51,26 @@ function Characters() {
                 <div
                   className={`bg-${theme}-200 p-5 rounded-b-sm font-play text-${theme}-400`}
                 >
+                  <div>
+                    <button
+                      type="button"
+                      onClick={() => handleClick(character)}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                        />
+                      </svg>
+                    </button>
+                  </div>
                   <p>{character.name}</p>
                   <p>{character.species}</p>
                   <p>{character.origin.name}</p>
