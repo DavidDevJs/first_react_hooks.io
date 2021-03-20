@@ -1,4 +1,10 @@
-import React, { useState, useEffect, useContext, useReducer } from 'react';
+import React, {
+  useState,
+  useEffect,
+  useContext,
+  useReducer,
+  useMemo,
+} from 'react';
 import { ThemeContext } from '../context/ThemeContext';
 
 const initialState = {
@@ -22,6 +28,7 @@ function Characters() {
   const [page, setPage] = useState(1);
   const { theme } = useContext(ThemeContext);
   const [favorites, dispatch] = useReducer(favoriteReducer, initialState);
+  const [search, setSearch] = useState('');
 
   const url = `https://rickandmortyapi.com/api/character/?page=${page}`;
 
@@ -35,21 +42,44 @@ function Characters() {
     dispatch({ type: 'ADD_FAVORITE', payload: favorite });
   };
 
+  const handleSearch = (event) => {
+    setSearch(event.target.value);
+  };
+
+  const filteredUsers = useMemo(
+    () =>
+      characters.filter((user) => {
+        return user.name.toLowerCase().includes(search.toLowerCase());
+      }),
+    [characters, search]
+  );
+
   return (
     <div className={`bg-${theme}-300`}>
-      {favorites.favorites.map((favorite) => (
-        <div className="flex flex-wrap">
+      <div className="grid grid-cols-1 sm:grid-cols-12 gap-1">
+        {favorites.favorites.map((favorite) => (
           <li
             key={favorite.id}
-            className={`font-sans list-none inline-block text-${theme}-400 bg-${theme}-200 rounded-md w-36 m-1 ml-6 p-1 list-inside`}
+            className={`font-sans list-none inline-block text-${theme}-400 bg-${theme}-200 rounded-md w-36 mx-auto my-3 p-2 list-inside`}
           >
             {favorite.name}
+            <img src={favorite.image} alt={favorite.name} />
           </li>
-        </div>
-      ))}
+        ))}
+      </div>
+
+      <div className="mb-6 mx-5">
+        <input
+          type="text"
+          value={search}
+          onChange={handleSearch}
+          placeholder="Search..."
+          className={`bg-${theme}-400 w-full rounded-lg p-2`}
+        />
+      </div>
 
       <ul className="Characters grid grid-cols-1 sm:grid-cols-4 gap-4">
-        {characters.map((character) => {
+        {filteredUsers.map((character) => {
           return (
             <li key={character.id}>
               {' '}
