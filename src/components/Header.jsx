@@ -10,7 +10,9 @@ const Header = () => {
 
   return (
     <div className={`p-6 bg-${theme}-300`}>
-      <h1 className={`text-6xl text-center font-bebas text-${theme}-400`}>
+      <h1
+        className={`text-6xl text-center font-mono font-semibold text-${theme}-400`}
+      >
         React_Hooks
       </h1>
       <div className="flex items-center">
@@ -31,6 +33,9 @@ const Header = () => {
           Dark
         </button>
       </div>
+      <h2 className={`font-mono font-medium text-5xl text-${theme}-400`}>
+        Favorites:
+      </h2>
     </div>
   );
 };

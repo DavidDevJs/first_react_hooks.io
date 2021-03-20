@@ -7,7 +7,7 @@ const initialState = {
 
 const favoriteReducer = (state, action) => {
   switch (action.type) {
-    case 'ADD_TO_FAVORITE':
+    case 'ADD_FAVORITE':
       return {
         ...state,
         favorites: [...state.favorites, action.payload],
@@ -20,8 +20,8 @@ const favoriteReducer = (state, action) => {
 function Characters() {
   const [characters, setCharacters] = useState([]);
   const [page, setPage] = useState(1);
-  const [favorite, dispatch] = useReducer(favoriteReducer, initialState);
   const { theme } = useContext(ThemeContext);
+  const [favorites, dispatch] = useReducer(favoriteReducer, initialState);
 
   const url = `https://rickandmortyapi.com/api/character/?page=${page}`;
 
@@ -31,12 +31,23 @@ function Characters() {
       .then((data) => setCharacters(data.results));
   });
 
-  const handleClick = () => {
-    dispatch({ type: 'ADD_TO_FAVORITE', payload: favorite });
+  const handleClick = (favorite) => {
+    dispatch({ type: 'ADD_FAVORITE', payload: favorite });
   };
 
   return (
     <div className={`bg-${theme}-300`}>
+      {favorites.favorites.map((favorite) => (
+        <div className="flex flex-wrap">
+          <li
+            key={favorite.id}
+            className={`font-sans list-none inline-block text-${theme}-400 bg-${theme}-200 rounded-md w-36 m-1 ml-6 p-1 list-inside`}
+          >
+            {favorite.name}
+          </li>
+        </div>
+      ))}
+
       <ul className="Characters grid grid-cols-1 sm:grid-cols-4 gap-4">
         {characters.map((character) => {
           return (
@@ -51,12 +62,14 @@ function Characters() {
                 <div
                   className={`bg-${theme}-200 p-5 rounded-b-sm font-play text-${theme}-400`}
                 >
-                  <div>
+                  <div className="flex flex-row-reverse">
                     <button
+                      className={`bg-${theme}-400 w-9 h-9 rounded-full shadow-md outline-none`}
                       type="button"
                       onClick={() => handleClick(character)}
                     >
                       <svg
+                        className={`text-${theme}-100`}
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         viewBox="0 0 24 24"
